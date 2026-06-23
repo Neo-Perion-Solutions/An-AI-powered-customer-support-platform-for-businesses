@@ -22,8 +22,8 @@ export function useSocket() {
   }, []);
 
   const on = (event: string, handler: (...args: unknown[]) => void) => {
-    socketRef.current?.on(event, handler as (...args: any[]) => void);
-    return () => socketRef.current?.off(event, handler as (...args: any[]) => void);
+    socketRef.current?.on(event, handler as (...args: unknown[]) => void);
+    return () => socketRef.current?.off(event, handler as (...args: unknown[]) => void);
   };
 
   const emit = (event: string, ...args: unknown[]) => {
