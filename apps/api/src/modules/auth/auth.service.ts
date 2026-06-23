@@ -229,9 +229,9 @@ export class AuthService {
     const refreshSecret = this.config.get<string>('JWT_REFRESH_SECRET', 'dev-refresh-secret');
 
     const payload: AuthenticatedUser = { id: userId, email, organizationId, roles };
-    const accessToken = await this.jwt.signAsync(payload, {
+    const accessToken = await this.jwt.signAsync(payload as any, {
       secret: accessSecret,
-      expiresIn: accessTtl,
+      expiresIn: accessTtl as any,
     });
 
     const refreshToken = randomBytes(48).toString('base64url');

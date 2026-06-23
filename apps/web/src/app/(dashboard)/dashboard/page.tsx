@@ -21,7 +21,8 @@ const QUICK_ACTIONS = [
 
 export default function DashboardPage() {
   const { data: analytics } = useAnalyticsOverview('7d');
-  const { data: conv = [] } = useConversations({ status: 'open' });
+  const { data: convData } = useConversations({ status: 'open' });
+  const conv = convData?.items ?? [];
 
   const chartData = Array.from({ length: 7 }).map((_, i) => ({
     date: `Day ${i + 1}`,
@@ -98,7 +99,11 @@ export default function DashboardPage() {
                     className="flex items-center justify-between gap-3 rounded-md p-2 hover:bg-accent"
                   >
                     <div className="flex min-w-0 items-center gap-3">
-                      <Avatar name={c.customerName} size="sm" />
+                      <Avatar className="h-8 w-8 text-xs bg-primary text-white">
+                        <span className="flex items-center justify-center font-semibold h-full w-full">
+                          {c.customerName?.charAt(0).toUpperCase() || 'U'}
+                        </span>
+                      </Avatar>
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium">{c.customerName}</p>
                         <p className="truncate text-xs text-muted-foreground">{c.subject}</p>

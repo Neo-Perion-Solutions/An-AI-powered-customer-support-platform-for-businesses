@@ -17,8 +17,8 @@ export class ChatbotService {
   async updateConfig(organizationId: string, dto: UpdateChatbotConfigDto) {
     return this.prisma.chatbotConfig.upsert({
       where: { organizationId },
-      create: { organizationId, ...dto },
-      update: dto,
+      create: { ...dto, organizationId, settings: dto.settings as import('@prisma/client').Prisma.InputJsonValue | undefined },
+      update: { ...dto, settings: dto.settings as import('@prisma/client').Prisma.InputJsonValue | undefined },
     });
   }
 }

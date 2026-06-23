@@ -40,7 +40,7 @@ export class FilesController {
     return this.service.upload(orgId, file);
   }
 
-  @Get(':key(*)')
+  @Get('*key')
   @Roles('OWNER', 'ADMIN', 'AGENT')
   @ApiOperation({ summary: 'Get a signed download URL (302 redirect)' })
   async get(
@@ -52,7 +52,7 @@ export class FilesController {
     res.redirect(url);
   }
 
-  @Delete(':key(*)')
+  @Delete('*key')
   @Roles('OWNER', 'ADMIN')
   @ApiOperation({ summary: 'Delete a file' })
   remove(@CurrentOrg() orgId: string, @Param('key') key: string) {

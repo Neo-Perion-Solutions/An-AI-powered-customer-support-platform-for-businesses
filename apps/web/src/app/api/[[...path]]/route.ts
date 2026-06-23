@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api';
 
-async function proxy(request: NextRequest, params: { path: string[] }): Promise<NextResponse> {
-  const path = (params.path || []).join('/');
+async function proxy(request: NextRequest, { params }: { params: Promise<{ path?: string[] }> }): Promise<NextResponse> {
+  const resolvedParams = await params;
+  const path = (resolvedParams.path || []).join('/');
   const url = new URL(`${API_URL}/${path}`);
   url.search = request.nextUrl.search;
 

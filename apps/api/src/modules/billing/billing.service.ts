@@ -72,6 +72,7 @@ export class BillingService {
     const priceId = priceMap[dto.plan];
     if (!priceId) throw new NotFoundException(`No Stripe price configured for ${dto.plan}`);
 
+    if (!this.stripe) throw new Error('Stripe is not configured');
     const session = await this.stripe.checkout.sessions.create({
       mode: 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],

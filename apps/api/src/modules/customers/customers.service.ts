@@ -48,14 +48,14 @@ export class CustomersService {
       if (exists) throw new ConflictException('Customer with externalId already exists');
     }
     return this.prisma.customer.create({
-      data: { ...dto, organizationId },
+      data: { ...dto, organizationId, metadata: dto.metadata as import('@prisma/client').Prisma.InputJsonValue | undefined },
     });
   }
 
   async update(organizationId: string, id: string, dto: UpdateCustomerDto) {
     const existing = await this.prisma.customer.findFirst({ where: { id, organizationId } });
     if (!existing) throw new NotFoundException('Customer not found');
-    return this.prisma.customer.update({ where: { id }, data: dto });
+    return this.prisma.customer.update({ where: { id }, data: { ...dto, metadata: dto.metadata as import('@prisma/client').Prisma.InputJsonValue | undefined } });
   }
 
   async remove(organizationId: string, id: string) {

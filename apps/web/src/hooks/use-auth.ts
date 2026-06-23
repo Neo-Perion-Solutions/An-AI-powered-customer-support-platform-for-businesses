@@ -10,6 +10,8 @@ export function useAuth() {
   const register = useAuthStore((s) => s.register);
   const logout = useAuthStore((s) => s.logout);
 
+  const hydrate = useAuthStore((s) => s.hydrate);
+
   return {
     user,
     organization,
@@ -18,5 +20,6 @@ export function useAuth() {
     login,
     register,
     logout,
+    hydrate,
   };
 }

@@ -19,7 +19,7 @@ export default function SecuritySettingsPage() {
 
   const onChangePassword = () => {
     if (newPwd !== confirmPwd) {
-      toast({ title: 'Passwords do not match', variant: 'destructive' });
+      toast.error('Passwords do not match');
       return;
     }
     toast({ title: 'Password updated' });

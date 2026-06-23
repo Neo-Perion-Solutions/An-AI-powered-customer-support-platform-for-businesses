@@ -7,11 +7,12 @@ import { AuthService } from './auth.service';
 @Module({
   imports: [
     JwtModule.registerAsync({
+      global: true,
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         secret: config.get<string>('JWT_ACCESS_SECRET', 'dev-access-secret'),
-        signOptions: { expiresIn: config.get<string>('JWT_ACCESS_TTL', '15m') },
+        signOptions: { expiresIn: config.get<string>('JWT_ACCESS_TTL', '15m') as any },
       }),
     }),
   ],

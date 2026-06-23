@@ -15,6 +15,15 @@ import { SetMetadata } from '@nestjs/common';
 
 export const Public = (): MethodDecorator & ClassDecorator => SetMetadata(IS_PUBLIC_KEY, true);
 
+import { createParamDecorator } from '@nestjs/common';
+
+export const CurrentUser = createParamDecorator(
+  (data: unknown, ctx: ExecutionContext) => {
+    const request = ctx.switchToHttp().getRequest();
+    return request.user;
+  },
+);
+
 export interface AuthenticatedUser {
   id: string;
   email: string;

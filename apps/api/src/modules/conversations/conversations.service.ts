@@ -127,7 +127,7 @@ export class ConversationsService {
         role: MessageRole.AGENT,
         channel: conv.channel,
         content: dto.content,
-        metadata: dto.metadata ?? {},
+        metadata: (dto.metadata ?? {}) as import('@prisma/client').Prisma.InputJsonValue,
       },
     });
     await this.prisma.conversation.update({

@@ -19,7 +19,7 @@ export class OrganizationsService {
             knowledgeSources: true,
           },
         },
-        subscription: true,
+        subscriptions: true,
       },
     });
     if (!org) throw new NotFoundException('Organization not found');
@@ -31,7 +31,7 @@ export class OrganizationsService {
       where: { id: organizationId },
       data: {
         name: dto.name ?? undefined,
-        settings: dto.settings ?? undefined,
+        settings: dto.settings as import('@prisma/client').Prisma.InputJsonValue | undefined,
       },
     });
     return org;

@@ -19,7 +19,7 @@ const MOCK_MEMBERS = [
   { id: '4', name: 'Diana Designer', email: 'diana@demo.com', role: 'AGENT', status: 'pending' },
 ];
 
-const ROLE_COLORS = {
+const ROLE_COLORS: Record<string, string> = {
   OWNER: 'bg-purple-100 text-purple-700',
   ADMIN: 'bg-blue-100 text-blue-700',
   AGENT: 'bg-green-100 text-green-700',

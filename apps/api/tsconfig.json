@@ -11,6 +11,7 @@
     "emitDecoratorMetadata": true,
     "declaration": false,
     "removeComments": true,
+    "noEmit": false,
     "paths": {
       "@neo/shared": ["../../../packages/shared/src"],
       "@neo/shared/*": ["../../../packages/shared/src/*"],

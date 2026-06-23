@@ -68,7 +68,7 @@ export class AuditInterceptor implements NestInterceptor {
             path: req.path,
             success,
             body: success ? this.safeBody(req.body) : null,
-          },
+          } as import('@prisma/client').Prisma.InputJsonValue,
           ipAddress: req.ip ?? null,
           userAgent: (req.headers['user-agent'] as string | undefined) ?? null,
         },
