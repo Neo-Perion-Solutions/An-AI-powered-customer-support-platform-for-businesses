@@ -50,7 +50,11 @@ export function cosineSimilarity(a: number[], b: number[]): number {
 }
 
 function resolveTopK(options: RetrieveOptions | undefined): number {
-  const raw = options?.topK ?? process.env['RAG_TOP_K'];
+  const fromOptions = options?.topK;
+  if (typeof fromOptions === 'number' && Number.isFinite(fromOptions) && fromOptions > 0) {
+    return fromOptions;
+  }
+  const raw = process.env['RAG_TOP_K'];
   if (raw) {
     const n = parseInt(raw, 10);
     if (Number.isFinite(n) && n > 0) {

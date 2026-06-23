@@ -215,7 +215,7 @@ export class GeminiClient {
     }
 
     const chatHistory: ChatHistoryItem[] = history
-      .filter((m) => m.role === 'user' || m.role === 'model')
+      .filter((m): m is ChatMessage & { role: 'user' | 'model' } => m.role === 'user' || m.role === 'model')
       .map((m) => ({ role: m.role, parts: [{ text: m.content }] }));
 
     return this.runWithRetry('chat', async () => {
@@ -252,7 +252,7 @@ export class GeminiClient {
     }
 
     const chatHistory: ChatHistoryItem[] = history
-      .filter((m) => m.role === 'user' || m.role === 'model')
+      .filter((m): m is ChatMessage & { role: 'user' | 'model' } => m.role === 'user' || m.role === 'model')
       .map((m) => ({ role: m.role, parts: [{ text: m.content }] }));
 
     return this.runWithRetry('stream', async () => {

@@ -49,9 +49,7 @@ const ABBREVIATIONS = new Set([
 ]);
 
 function splitSentences(text: string): string[] {
-  const normalized = text.replace(/
-/g, '
-').trim();
+  const normalized = text.replace(/\n/g, ' ').trim();
   if (normalized.length === 0) {
     return [];
   }
@@ -78,9 +76,7 @@ function splitSentences(text: string): string[] {
       continue;
     }
 
-    if (ch === '
-' && normalized[i + 1] === '
-') {
+    if (ch === '\r\n' && normalized[i + 1] === '\r\n') {
       if (buffer.trim().length > 0) {
         sentences.push(buffer.trim());
       }
@@ -169,9 +165,7 @@ export function chunkText(text: string, options: ChunkOptions = {}): Chunk[] {
   const chunkSize = Math.max(1, options.chunkSize ?? CHUNK_SIZE);
   const chunkOverlap = Math.max(0, Math.min(options.chunkOverlap ?? CHUNK_OVERLAP, chunkSize - 1));
 
-  const trimmed = text.replace(/
-/g, '
-').trim();
+  const trimmed = text.replace(/\n/g, ' ').trim();
   if (trimmed.length === 0) {
     return [];
   }
