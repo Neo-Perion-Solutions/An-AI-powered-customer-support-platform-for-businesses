@@ -19,7 +19,8 @@
     "infra:down": "docker compose -f infra/docker-compose.yml down",
     "infra:logs": "docker compose -f infra/docker-compose.yml logs -f",
     "verify": "bash scripts/verify.sh",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "clean": "turbo run clean && rm -rf node_modules",
+    "postinstall": "pnpm db:generate"
   },
   "devDependencies": {
     "eslint": "^9.13.0",
